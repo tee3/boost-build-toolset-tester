@@ -1,5 +1,60 @@
 import testing ;
 
+# NOTE: comment out lines below to disable features
+link-choices = shared static ;
+#runtime-link-choices = shared static ;
+#runtime-debugging-choices = on off ;
+optimization-choices = off speed space ;
+profiling-choices = off on ;
+inlining-choices = off on full ;
+threading-choices = single multi ;
+rtti-choices = off on ;
+exception-handling-choices = off on ;
+
+#asynch-exceptions-choices = off on ;
+
+#extern-c-nothrow-choices = off on ;
+
+debug-symbols-choices = on off ;
+
+strip-choices = off on ;
+define-choices = DEFINE0 DEFINE1 ;
+undef-choices = UNDEF0 UNDEF1 ;
+include-choices = include0 include1 ;
+warnings-choices = off on ;
+warnings-as-errors-choices = off on ;
+
+options =
+  <link>$(link-choices)
+  <runtime-link>$(runtime-link-choices)
+  <runtime-debugging>$(runtime-debugging-choices)
+  <optimization>$(optimization-choices)
+  <profiling>$(profiling-choices)
+  <inlining>$(inlining-choices)
+  <threading>$(threading-choices)
+  <rtti>$(rtti-choices)
+  <exception-handling>$(exception-handling-choices)
+
+  <asynch-exceptions>$(asynch-exceptions-choices)
+
+  <extern-c-nothrow>$(extern-c-nothrow-choices)
+
+  <debug-symbols>$(debug-symbols-choices)
+
+  <strip>$(strip-choices)
+  <define>$(define-choices)
+  <undef>$(undef-choices)
+  <include>$(include-choices)
+  <warnings>$(warnings-choices)
+  <warnings-as-errors>$(warnings-as-errors-choices)
+
+  ;
+
+project
+  : default-build
+    $(options)
+  ;
+
 # targets to build
 compile a_c.c ;
 link main_c.c ;

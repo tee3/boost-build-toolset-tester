@@ -20,6 +20,61 @@ user's configuration does not interfere with the testing.
 
    $ b2 --test-config=user-config.jam
 
+By default, this tests almost all combination of the standard
+features.  These features are defined in Boost.Build and a
+non-normative list is given below.  The list of options tested can be
+found in the logic within the `Jamroot <Jamroot>`__.
+
+* link
+* runtime-link (disabled)
+* runtime-debugging (disabled)
+* optimization
+* profiling
+* inlining
+* threading
+* rtti
+* exception-handling
+* asynch-exceptions (disabled)
+* extern-c-nothrow (disabled)
+* debug-symbols
+* strip
+* define
+* undef
+* include
+* warnings
+* warnings-as-errors
+
+This is a lot of tests.  To limit the scale of the tests, add
+properties for features to the command line to limit the tests to only
+that value of the given property.
+
+For example, to limit to only building for a single toolset,
+run the following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       toolset=gcc
+
+To limit further to only include static linking, run the following
+command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       toolset=gcc \
+       link=static
+
+To limit further to only test for single-threaded programs, run the
+following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       toolset=gcc \
+       link=static \
+       threading=single
+
 Requirements
 ------------
 

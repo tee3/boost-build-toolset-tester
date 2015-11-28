@@ -23,18 +23,14 @@ if [ os.name ] = NT
 else if [ os.name ] = CYGWIN
 {
   add-toolset gcc ;
-  add-toolset clang ;
 }
 else if [ os.name ] = LINUX
 {
   add-toolset gcc ;
-  add-toolset clang ;
 }
 else if [ os.name ] = MACOSX
 {
   add-toolset darwin ;
-  add-toolset darwin : 5 : /usr/local/bin/gcc-5 ;
-  add-toolset clang : 3.5 : /usr/local/bin/clang-3.5 ;
 }
 
 # build all toolsets by default

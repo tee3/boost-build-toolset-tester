@@ -1,0 +1,8 @@
+sudo: false
+os:
+  - linux
+  - osx
+install:
+  - ./.travis-boost-build-stage.sh
+script:
+  - BOOST_BUILD_PATH=/tmp/build /tmp/build/b2 --test-config=user-config.jam --hash

@@ -17,3 +17,21 @@ else if [ os.name ] = MACOSX
 {
   using darwin ;
 }
+
+# Emscripten toolsets
+if [ os.name ] = NT
+{
+#  using emscripten ;
+}
+else if [ os.name ] = CYGWIN
+{
+  using emscripten ;
+}
+else if [ os.name ] = LINUX
+{
+  using emscripten ;
+}
+else if [ os.name ] = MACOSX
+{
+  using emscripten ;
+}

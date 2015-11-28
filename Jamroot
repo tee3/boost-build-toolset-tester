@@ -22,6 +22,24 @@ else if [ os.name ] = MACOSX
   toolset-choices += darwin ;
 }
 
+# Emscripten toolsets
+if [ os.name ] = NT
+{
+#  toolset-choices += emscripten ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolset-choices += emscripten ;
+}
+else if [ os.name ] = LINUX
+{
+  toolset-choices += emscripten ;
+}
+else if [ os.name ] = MACOSX
+{
+  toolset-choices += emscripten ;
+}
+
 echo "building for the following toolsets:" ;
 for local t in $(toolset-choices)
 {

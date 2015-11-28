@@ -37,3 +37,9 @@ project
   : default-build
      <toolset>$(toolsets)
   ;
+
+echo "building for the following toolsets:" ;
+for local t in $(toolsets)
+{
+  echo "   * $(t)" ;
+}

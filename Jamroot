@@ -20,6 +20,9 @@ else if [ os.name ] = LINUX
 else if [ os.name ] = MACOSX
 {
   toolset-choices += darwin ;
+  toolset-choices += clang ;
+  toolset-choices += darwin-5 ;
+  toolset-choices += clang-3.5 ;
 }
 
 echo "building for the following toolsets:" ;

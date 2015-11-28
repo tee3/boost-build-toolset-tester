@@ -1,0 +1,39 @@
+import os ;
+
+# generate a list of toolsets to test
+local toolsets = ;
+
+if [ os.name ] = NT
+{
+  toolsets += msvc ;
+  using msvc ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolsets += gcc ;
+  using gcc ;
+  toolsets += clang ;
+  using clang ;
+}
+else if [ os.name ] = LINUX
+{
+  toolsets += gcc ;
+  using gcc ;
+  toolsets += clang ;
+  using clang ;
+}
+else if [ os.name ] = MACOSX
+{
+  toolsets += darwin ;
+  using darwin ;
+  toolsets += darwin-5 ;
+  using darwin : 5 : /usr/local/bin/gcc-5 ;
+  toolsets += clang-3.5 ;
+  using clang : 3.5 : /usr/local/bin/clang-3.5 ;
+}
+
+# build all toolsets by default
+project
+  : default-build
+     <toolset>$(toolsets)
+  ;

@@ -1,0 +1,16 @@
+import testing ;
+
+# targets to build
+compile a_c.c ;
+link main_c.c ;
+lib liba_c : a_c.c a_c.h ;
+link main_a_c.c liba_c ;
+link stdlib_io_c.c ;
+link stdlib_c.c ;
+
+compile a_cpp.cpp ;
+link main_cpp.cpp ;
+lib liba_cpp : a_cpp.cpp a_cpp.hpp ;
+link main_a_cpp.cpp liba_cpp ;
+link stdlib_io_cpp.cpp ;
+link stdlib_cpp.cpp ;

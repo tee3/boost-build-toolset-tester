@@ -1,5 +1,6 @@
 import os ;
 import testing ;
+import regex ;
 
 # generate a list of toolsets to test
 local toolset-choices = ;
@@ -29,6 +30,7 @@ for local t in $(toolset-choices)
 }
 
 # NOTE: comment out lines below to disable features
+#variant-choices = debug release profile ;
 link-choices = shared static ;
 #runtime-link-choices = shared static ;
 #runtime-debugging-choices = on off ;
@@ -54,6 +56,7 @@ warnings-as-errors-choices = off on ;
 
 options =
   <toolset>$(toolset-choices)
+  <variant>$(variant-choices)
   <link>$(link-choices)
   <runtime-link>$(runtime-link-choices)
   <runtime-debugging>$(runtime-debugging-choices)
@@ -79,24 +82,75 @@ options =
 
   ;
 
+bundles = ;
+for local o in $(options)
+{
+  local o-name = [ regex.replace $(o) "[<>]" "-" ] ;
+  local b = bundle$(o-name) ;
+
+  bundles += $(b) ;
+
+  explicit $(b) ;
+  alias $(b)
+    : # sources
+
+      a_c
+      liba_c
+
+      main_c
+      main_a_c
+      stdlib_io_c
+      stdlib_c
+
+      a_cpp
+      liba_cpp
+
+      main_cpp
+      main_a_cpp
+      stdlib_io_cpp
+      stdlib_cpp
+
+    : # requirements
+
+      $(o)
+
+    ;
+}
+
+alias all : $(bundles) ;
+
 project
   : default-build
     $(options)
   ;
 
 # targets to build
+explicit a_c ;
 compile a_c.c ;
+explicit main_c ;
 link main_c.c ;
+explicit liba_c ;
 lib liba_c : a_c.c a_c.h ;
+explicit main_a_c ;
 link main_a_c.c liba_c ;
+explicit stdlib_io_c ;
 link stdlib_io_c.c ;
+explicit stdlib_c ;
 link stdlib_c.c ;
+explicit hello_c ;
 run hello_c.c ;
 
+explicit a_cpp ;
 compile a_cpp.cpp ;
+explicit main_cpp ;
 link main_cpp.cpp ;
+explicit liba_cpp ;
 lib liba_cpp : a_cpp.cpp a_cpp.hpp ;
+explicit main_a_cpp ;
 link main_a_cpp.cpp liba_cpp ;
+explicit stdlib_io_cpp ;
 link stdlib_io_cpp.cpp ;
+explicit stdlib_cpp ;
 link stdlib_cpp.cpp ;
+explicit hello_cpp ;
 run hello_cpp.cpp ;

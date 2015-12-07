@@ -17,6 +17,7 @@ rule add-toolset ( name : version ? : path ? )
 # generate a list of toolsets to test
 local toolset-choices = ;
 
+# Default toolsets
 if [ os.name ] = NT
 {
   add-toolset msvc ;

@@ -1,4 +1,10 @@
 import os ;
+import feature ;
+
+if ! ( baremetal in [ feature.values target-os ] )
+{
+  feature.extend target-os : baremetal ;
+}
 
 # Default toolsets
 if [ os.name ] = NT

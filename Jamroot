@@ -1,4 +1,44 @@
+import os ;
 import testing ;
+
+# configure a toolset and add it to the list of toolsets to test
+rule add-toolset ( name : version ? : path ? )
+{
+  local versioned-name = $(name) ;
+  if $(version)
+  {
+    versioned-name = $(name)-$(version) ;
+  }
+
+  toolset-choices += $(versioned-name) ;
+  using $(name) : $(version) : $(path) ;
+}
+
+# generate a list of toolsets to test
+local toolset-choices = ;
+
+if [ os.name ] = NT
+{
+  add-toolset msvc ;
+}
+else if [ os.name ] = CYGWIN
+{
+  add-toolset gcc ;
+}
+else if [ os.name ] = LINUX
+{
+  add-toolset gcc ;
+}
+else if [ os.name ] = MACOSX
+{
+  add-toolset darwin ;
+}
+
+echo "building for the following toolsets:" ;
+for local t in $(toolset-choices)
+{
+  echo "   * $(t)" ;
+}
 
 # NOTE: comment out lines below to disable features
 link-choices = shared static ;
@@ -25,6 +65,7 @@ warnings-choices = off on ;
 warnings-as-errors-choices = off on ;
 
 options =
+  <toolset>$(toolset-choices)
   <link>$(link-choices)
   <runtime-link>$(runtime-link-choices)
   <runtime-debugging>$(runtime-debugging-choices)

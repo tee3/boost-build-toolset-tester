@@ -80,11 +80,41 @@ following command.
        link=static \
        threading=single
 
+To test the TMS320 Code Generation Tools, limit the properties to
+those supported by the toolset to minimize the warnings from
+Boost.Build.
+
+* target-os=baremetal
+* link=static
+
+To limit tests during development, narrow the properties as much as
+possible to test as few variants as desired.  For example, to minimize
+the architecture and instruction set, run the following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       --hash \
+        toolset=tms320c6000 \
+        architecture=tms320c6000 \
+        instruction-set=tms320c64x+ \
+        target-os=baremetal \
+        link=static
+
 Requirements
 ------------
 
 * Boost.Build
 * All desired compilers
+
+Texas Instruments
+~~~~~~~~~~~~~~~~~
+
+* TMS320C2000 6.4.9 installed in ``${HOME}/opt/ti``
+* TMS320C5400 4.2.0 installed in ``${HOME}/opt/ti``
+  * this is not yet available for OS X
+* TMS320C5500 4.4.1 installed in ``${HOME}/opt/ti``
+* TMS320C5000 7.4.16 installed in ``${HOME}/opt/ti``
 
 Adding Toolsets
 ---------------

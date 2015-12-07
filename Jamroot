@@ -22,6 +22,48 @@ else if [ os.name ] = MACOSX
   toolset-choices += darwin ;
 }
 
+# TI toolsets
+if [ os.name ] = NT
+{
+  toolset-choices += tms320c2000-6.4.9 ;
+  toolset-choices += tms320c2000-15.3.0 ;
+  toolset-choices += tms320c5400-3.10 ;
+  toolset-choices += tms320c5400-4.2.0 ;
+  toolset-choices += tms320c5500-4.4.1 ;
+  toolset-choices += tms320c6000-7.4.16 ;
+  toolset-choices += tms320c6000-8.0.4 ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolset-choices += tms320c2000-6.4.9 ;
+  toolset-choices += tms320c2000-15.3.0 ;
+  toolset-choices += tms320c5400-3.10 ;
+  toolset-choices += tms320c5400-4.2.0 ;
+  toolset-choices += tms320c5500-4.4.1 ;
+  toolset-choices += tms320c6000-7.4.16 ;
+  toolset-choices += tms320c6000-8.0.4 ;
+}
+else if [ os.name ] = LINUX
+{
+  toolset-choices += tms320c2000-6.4.9 ;
+  toolset-choices += tms320c2000-15.3.0 ;
+#  toolset-choices += tms320c5400-3.10 ;
+  toolset-choices += tms320c5400-4.2.0 ;
+  toolset-choices += tms320c5500-4.4.1 ;
+  toolset-choices += tms320c6000-7.4.16 ;
+  toolset-choices += tms320c6000-8.0.4 ;
+}
+else if [ os.name ] = MACOSX
+{
+  toolset-choices += tms320c2000-6.4.9 ;
+  toolset-choices += tms320c2000-15.3.0 ;
+#  toolset-choices += tms320c5400-3.10 ;
+#  toolset-choices += tms320c5400-4.2.0 ;
+  toolset-choices += tms320c5500-4.4.2 ;
+  toolset-choices += tms320c6000-7.4.16 ;
+  toolset-choices += tms320c6000-8.0.4 ;
+}
+
 echo "building for the following toolsets:" ;
 for local t in $(toolset-choices)
 {
@@ -100,3 +142,8 @@ link main_a_cpp.cpp liba_cpp ;
 link stdlib_io_cpp.cpp ;
 link stdlib_cpp.cpp ;
 run hello_cpp.cpp ;
+
+#compile a_asm_tms320c2000.asm : <toolset>tms320c2000 ;
+#compile a_asm_tms320c5400.asm : <toolset>tms320c5400 ;
+#compile a_asm_tms320c5500.asm : <toolset>tms320c5500 ;
+#compile a_asm_tms320c6000.asm : <toolset>tms320c6000 ;

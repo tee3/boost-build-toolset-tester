@@ -14,11 +14,13 @@ Overview
 
 Running the following command will run all tests against each compiler
 known.  Note that using the ``--test-config`` option ensures that the
-user's configuration does not interfere with the testing.
+user's configuration does not interfere with the testing and the
+``--hash`` option keeps the paths to reasonable lengths with the large
+number of properties generated for this project.
 
 .. code:: sh
 
-   $ b2 --test-config=user-config.jam
+   $ b2 --test-config=user-config.jam --hash
 
 By default, this tests almost all combination of the standard
 features.  These features are defined in Boost.Build and a
@@ -54,6 +56,7 @@ run the following command.
 .. code:: sh
 
    $ b2 --test-config=user-config.jam \
+       --hash \
        toolset=gcc
 
 To limit further to only include static linking, run the following
@@ -62,6 +65,7 @@ command.
 .. code:: sh
 
    $ b2 --test-config=user-config.jam \
+       --hash \
        toolset=gcc \
        link=static
 
@@ -71,6 +75,7 @@ following command.
 .. code:: sh
 
    $ b2 --test-config=user-config.jam \
+       --hash \
        toolset=gcc \
        link=static \
        threading=single

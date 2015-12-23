@@ -1,0 +1,19 @@
+import os ;
+
+# Default toolsets
+if [ os.name ] = NT
+{
+  using msvc ;
+}
+else if [ os.name ] = CYGWIN
+{
+  using gcc ;
+}
+else if [ os.name ] = LINUX
+{
+  using gcc ;
+}
+else if [ os.name ] = MACOSX
+{
+  using darwin ;
+}

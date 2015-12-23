@@ -1,38 +1,25 @@
 import os ;
 import testing ;
 
-# configure a toolset and add it to the list of toolsets to test
-rule add-toolset ( name : version ? : path ? )
-{
-  local versioned-name = $(name) ;
-  if $(version)
-  {
-    versioned-name = $(name)-$(version) ;
-  }
-
-  toolset-choices += $(versioned-name) ;
-  using $(name) : $(version) : $(path) ;
-}
-
 # generate a list of toolsets to test
 local toolset-choices = ;
 
 # Default toolsets
 if [ os.name ] = NT
 {
-  add-toolset msvc ;
+  toolset-choices += msvc ;
 }
 else if [ os.name ] = CYGWIN
 {
-  add-toolset gcc ;
+  toolset-choices += gcc ;
 }
 else if [ os.name ] = LINUX
 {
-  add-toolset gcc ;
+  toolset-choices += gcc ;
 }
 else if [ os.name ] = MACOSX
 {
-  add-toolset darwin ;
+  toolset-choices += darwin ;
 }
 
 echo "building for the following toolsets:" ;

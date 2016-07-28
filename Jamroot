@@ -22,6 +22,24 @@ else if [ os.name ] = MACOSX
   toolset-choices += darwin ;
 }
 
+# IAR toolsets
+if [ os.name ] = NT
+{
+  toolset-choices += iccarm-7.70.1 ;
+#  toolset-choices += iccavr32-7.2 ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolset-choices += iccarm-7.70.1 ;
+#  toolset-choices += iccavr32-7.2 ;
+}
+else if [ os.name ] = LINUX
+{
+}
+else if [ os.name ] = MACOSX
+{
+}
+
 echo "building for the following toolsets:" ;
 for local t in $(toolset-choices)
 {
@@ -100,3 +118,6 @@ link main_a_cpp.cpp liba_cpp ;
 link stdlib_io_cpp.cpp ;
 link stdlib_cpp.cpp ;
 run hello_cpp.cpp ;
+
+#compile a_asm_iccarm.asm : <toolset>iccarm ;
+#compile a_asm_iccavr32.asm : <toolset>iccavr32 ;

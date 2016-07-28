@@ -80,11 +80,38 @@ following command.
        link=static \
        threading=single
 
+To test the IAR Systems compilers, limit the properties to
+those supported by the toolset to minimize the warnings from
+Boost.Build.
+
+* target-os=baremetal
+* link=static
+
+To limit tests during development, narrow the properties as much as
+possible to test as few variants as desired.  For example, to minimize
+the architecture and instruction set, run the following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       --hash \
+        toolset=iccarm \
+        architecture=armv7 \
+        instruction-set=armv7 \
+        target-os=baremetal \
+        link=static
+
 Requirements
 ------------
 
 * Boost.Build
 * All desired compilers
+
+IAR Systems
+~~~~~~~~~~~
+
+* IAR Embedded Workbench for ARM 7.5
+* IAR Embedded Workbench for AVR32 7.2
 
 Adding Toolsets
 ---------------

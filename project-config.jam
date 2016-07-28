@@ -6,6 +6,18 @@ if ! ( baremetal in [ feature.values target-os ] )
   feature.extend target-os : baremetal ;
 }
 
+path-constant boost-build-iar : ../boost-build-iar ;
+
+# @todo HACK - add tools to the Boost.Build path
+{
+  import modules ;
+
+  local boost-build-path = [ modules.peek : BOOST_BUILD_PATH ] ;
+  modules.poke : BOOST_BUILD_PATH : $(boost-build-iar) $(boost-build-path) ;
+}
+
+path-constant HOME : [ os.environ HOME ] ;
+
 # Default toolsets
 if [ os.name ] = NT
 {
@@ -22,4 +34,22 @@ else if [ os.name ] = LINUX
 else if [ os.name ] = MACOSX
 {
   using darwin ;
+}
+
+# IAR toolsets
+if [ os.name ] = NT
+{
+  using iccarm ;
+#  using iccavr32 ;
+}
+else if [ os.name ] = CYGWIN
+{
+  using iccarm ;
+#  using iccavr32 ;
+}
+else if [ os.name ] = LINUX
+{
+}
+else if [ os.name ] = MACOSX
+{
 }

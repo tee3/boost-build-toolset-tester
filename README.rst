@@ -80,11 +80,36 @@ following command.
        link=static \
        threading=single
 
+To test the SDS compilers, limit the properties to those supported by
+the toolset to minimize the warnings from Boost.Build.
+
+* target-os=baremetal
+* link=static
+
+To limit tests during development, narrow the properties as much as
+possible to test as few variants as desired.  For example, to minimize
+the architecture and instruction set, run the following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       --hash \
+        toolset=crosscode \
+        architecture=mc68000 \
+        instruction-set=mc68328 \
+        target-os=baremetal \
+        link=static
+
 Requirements
 ------------
 
 * Boost.Build
 * All desired compilers
+
+SDS
+~~~
+
+* SDS CrossCode C/C++ Compiler 7.4
 
 Adding Toolsets
 ---------------

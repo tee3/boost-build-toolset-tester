@@ -22,6 +22,22 @@ else if [ os.name ] = MACOSX
   toolset-choices += darwin ;
 }
 
+# SDS toolsets
+if [ os.name ] = NT
+{
+  toolset-choices += crosscode-7.4 ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolset-choices += crosscode-7.4 ;
+}
+else if [ os.name ] = LINUX
+{
+}
+else if [ os.name ] = MACOSX
+{
+}
+
 echo "building for the following toolsets:" ;
 for local t in $(toolset-choices)
 {
@@ -100,3 +116,5 @@ link main_a_cpp.cpp liba_cpp ;
 link stdlib_io_cpp.cpp ;
 link stdlib_cpp.cpp ;
 run hello_cpp.cpp ;
+
+#compile a_asm_crosscode.asm : <toolset>crosscode ;

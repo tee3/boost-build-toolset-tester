@@ -80,11 +80,28 @@ following command.
        link=static \
        threading=single
 
+To limit tests during development, narrow the properties as much as
+possible to test as few variants as desired.  For example, to minimize
+the GPU architecture and GPU code, run the following command.
+
+.. code:: sh
+
+   $ b2 --test-config=user-config.jam \
+       --hash \
+        toolset=nvcc \
+        gpu-architecture=compute_70 \
+        gpu-code=sm_70
+
 Requirements
 ------------
 
 * Boost.Build
 * All desired compilers
+
+NVIDIA nvcc
+~~~~~~~~~~~
+
+CUDA installed in the default location.
 
 Adding Toolsets
 ---------------

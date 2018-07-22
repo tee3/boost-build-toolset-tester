@@ -22,6 +22,24 @@ else if [ os.name ] = MACOSX
   toolset-choices += darwin ;
 }
 
+# nvcc toolsets
+if [ os.name ] = NT
+{
+  toolset-choices += nvcc-9.2 ;
+}
+else if [ os.name ] = CYGWIN
+{
+  toolset-choices += nvcc-9.2 ;
+}
+else if [ os.name ] = LINUX
+{
+  toolset-choices += nvcc-9.1 ;
+}
+else if [ os.name ] = MACOSX
+{
+  toolset-choices += nvcc-9.2 ;
+}
+
 echo "building for the following toolsets:" ;
 for local t in $(toolset-choices)
 {
@@ -100,3 +118,11 @@ link main_a_cpp.cpp liba_cpp ;
 link stdlib_io_cpp.cpp ;
 link stdlib_cpp.cpp ;
 run hello_cpp.cpp ;
+
+#compile a_cu.cu : <toolset>nvcc ;
+#link main_cu.cu : <toolset>nvcc ;
+#lib liba_cu : a_cu.cu a_cu.cuh : <toolset>nvcc ;
+#link main_a_cu.cu liba_cu : <toolset>nvcc ;
+#link stdlib_io_cu.cu : <toolset>nvcc ;
+#link stdlib_cu.cu : <toolset>nvcc ;
+#run hello_cu.cu : <toolset>nvcc ;

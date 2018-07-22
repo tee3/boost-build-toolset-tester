@@ -1,5 +1,17 @@
 import os ;
 
+path-constant boost-build-nvcc : ../boost-build-nvcc ;
+
+# @todo HACK - add tools to the Boost.Build path
+{
+  import modules ;
+
+  local boost-build-path = [ modules.peek : BOOST_BUILD_PATH ] ;
+  modules.poke : BOOST_BUILD_PATH : $(boost-build-nvcc) $(boost-build-path) ;
+}
+
+path-constant HOME : [ os.environ HOME ] ;
+
 # Default toolsets
 if [ os.name ] = NT
 {
@@ -17,3 +29,7 @@ else if [ os.name ] = MACOSX
 {
   using darwin ;
 }
+
+# NVIDIA toolsets
+
+using nvcc ;
